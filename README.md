@@ -1,4 +1,13 @@
-# PHP Laravel 12 Role Based Route Protection
+# PHP_Laravel12_Role_Based_Route_Protection
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-red" alt="Laravel Version">
+  <img src="https://img.shields.io/badge/PHP-8.2+-blue" alt="PHP Version">
+  <img src="https://img.shields.io/badge/Auth-Breeze-green" alt="Authentication">
+  <img src="https://img.shields.io/badge/Role-Based%20Access-Control-orange" alt="RBAC">
+  <img src="https://img.shields.io/badge/License-MIT-lightgrey" alt="License">
+</p>
+
 
 ##  Overview
 
@@ -19,7 +28,7 @@ The system ensures that users can only access the parts of the application that 
 
 ---
 
-##  Folder Structure (Important Files)
+##  Folder Structure
 
 ```
 app/
@@ -368,5 +377,3 @@ You have successfully implemented:
 * 403 protection for unauthorized users
 
 ---
-
-🎉 Your Laravel 12 Role-Based Route Protection system is now complete.

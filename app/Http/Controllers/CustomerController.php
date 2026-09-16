@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
 class CustomerController extends Controller
 {
-    public function dashboard()
+    /**
+     * Display the customer dashboard.
+     */
+    public function dashboard(Request $request): View
     {
-        return "Welcome Customer 👋";
+        $user = $request->user();
+
+        return view('customer.dashboard', compact('user'));
     }
 }
-

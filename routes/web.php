@@ -11,7 +11,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,21 @@ Route::get('/dashboard', function () {
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+    Route::get('/profile', [
+        ProfileController::class,
+        'edit'
+    ])->name('profile.edit');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
+    Route::patch('/profile', [
+        ProfileController::class,
+        'update'
+    ])->name('profile.update');
+
+    Route::delete('/profile', [
+        ProfileController::class,
+        'destroy'
+    ])->name('profile.destroy');
 });
 
 /*
@@ -41,14 +49,68 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', [AdminController::class, 'dashboard'])
-            ->name('dashboard');
+        /*
+        | Dashboard
+        */
+        Route::get('/dashboard', [
+            AdminController::class,
+            'dashboard'
+        ])->name('dashboard');
 
-        Route::get('/users', [AdminController::class, 'users'])
-            ->name('users');
+        /*
+        | User Management
+        */
+        Route::get('/users', [
+            AdminController::class,
+            'users'
+        ])->name('users');
 
-        Route::patch('/users/{user}/role', [AdminController::class, 'updateRole'])
-            ->name('users.update-role');
+        /*
+        | Update Role
+        */
+        Route::patch('/users/{user}/role', [
+            AdminController::class,
+            'updateRole'
+        ])->name('users.update-role');
+
+        /*
+        | Activate / Deactivate
+        */
+        Route::patch('/users/{user}/activate', [
+            AdminController::class,
+            'activate'
+        ])->name('users.activate');
+
+        Route::patch('/users/{user}/deactivate', [
+            AdminController::class,
+            'deactivate'
+        ])->name('users.deactivate');
+
+        /*
+        | Bulk Actions
+        */
+        Route::post('/users/bulk-activate', [
+            AdminController::class,
+            'bulkActivate'
+        ])->name('users.bulk-activate');
+
+        Route::post('/users/bulk-deactivate', [
+            AdminController::class,
+            'bulkDeactivate'
+        ])->name('users.bulk-deactivate');
+
+        Route::post('/users/bulk-role', [
+            AdminController::class,
+            'bulkRole'
+        ])->name('users.bulk-role');
+
+        /*
+        | CSV Export
+        */
+        Route::get('/users/export', [
+            AdminController::class,
+            'exportUsers'
+        ])->name('users.export');
     });
 
 /*
@@ -62,8 +124,10 @@ Route::middleware(['auth', 'role:customer'])
     ->name('customer.')
     ->group(function () {
 
-        Route::get('/dashboard', [CustomerController::class, 'dashboard'])
-            ->name('dashboard');
+        Route::get('/dashboard', [
+            CustomerController::class,
+            'dashboard'
+        ])->name('dashboard');
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
